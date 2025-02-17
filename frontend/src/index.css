@@ -1,0 +1,34 @@
+/* Width & Height */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px; /* For horizontal scrollbar */
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #121212; /* Dark background */
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #E44F26; /* Orange scrollbar */
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff5722; /* Brighter orange */
+  }
+  
+  @media (max-width: 768px) {
+    ::-webkit-scrollbar {
+      width: 4px; /* Make it thinner on mobile */
+      height: 4px;
+    }
+  
+    ::-webkit-scrollbar-thumb {
+      background: #E44F26;
+    }
+  }
+  
