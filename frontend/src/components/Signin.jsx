@@ -11,6 +11,7 @@ import Alert from '@mui/material/Alert';
 function Signin() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     const [isSignedOut, setIsSignedOut] = useState(false);
     const navigate = useNavigate();
     const setUser = useSetRecoilState(userState);
@@ -79,6 +80,12 @@ function Signin() {
                     label="Username"
                     variant="outlined"
                     fullWidth
+                    error={username !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(username)} // Error if not a valid email
+                    helperText={
+                      username !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(username)
+                        ? "Enter a valid email address"
+                        : ""
+                    }
                     InputLabelProps={{ style: { color: "#bbb" } }}
                     InputProps={{
                         style: { color: "white", backgroundColor: "#333", borderRadius: 8 },
@@ -86,7 +93,19 @@ function Signin() {
                     sx={{ mt: 2 }}
                 />
                 <TextField
-                    onChange={(e) => setPassword(e.target.value)}
+                     onChange={(e) => {
+                        const value = e.target.value;
+                        setPassword(value);
+    
+                        // Inline Validation using Regex
+                        setError(
+                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{8,}$/.test(value)
+                                ? "" // if  Valid password
+                                : "Must have 1 uppercase, 1 lowercase, 1 special char & 8+ chars" //else error msg
+                        );
+                    }}
+                    error={!!error}
+                    helperText={error}
                     label="Password"
                     type="password"
                     variant="outlined"

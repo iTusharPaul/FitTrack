@@ -2,10 +2,24 @@ import { useEffect, useState } from "react";
 import { Typography, Card, Box, CircularProgress, Divider, Chip } from "@mui/material";
 import axios from "axios";
 import { BASE_URL } from "../config"; 
+import { useRecoilValue } from "recoil";
+import { userEmailState } from "../store/selectors/userEmail";
+import { isUserLoading } from "../store/selectors/isUserLoading";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const userEmail = useRecoilValue(userEmailState);
+  const UserLoading = useRecoilValue(isUserLoading);
+  const navigate = useNavigate();
+ 
+
+  useEffect(()=>{
+    if (UserLoading || !userEmail) {
+      navigate("/");
+    }
+  }, [UserLoading, userEmail, navigate])
 
   useEffect(() => {
     const fetchUserData = async () => {

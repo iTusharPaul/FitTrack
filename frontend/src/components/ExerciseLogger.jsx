@@ -2,11 +2,24 @@ import React, { useState } from "react";
 import { Button, Card, Typography, TextField } from "@mui/material";
 import { BASE_URL } from "../config";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { userEmailState } from "../store/selectors/userEmail";
+import { isUserLoading } from "../store/selectors/isUserLoading";
 
 export default function ExerciseLogger({ workout, closePopupHandler }) {
   const [set1, setSet1] = useState({ reps: 0, weight: 0 });
   const [set2, setSet2] = useState({ reps: 0, weight: 0 });
   const [set3, setSet3] = useState({ reps: 0, weight: 0 });
+  const userEmail = useRecoilValue(userEmailState);
+  const UserLoading = useRecoilValue(isUserLoading);
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if (UserLoading || !userEmail) {
+      navigate("/");
+    }
+  }, [UserLoading, userEmail, navigate])
 
   return (
     <div

@@ -6,10 +6,22 @@ import { useEffect, useState } from 'react';
 import { Typography, Card, Box,Button } from '@mui/material';
 import axios from 'axios';
 import { BASE_URL } from '../config';
-
+import { useRecoilValue } from "recoil";
+import { userEmailState } from "../store/selectors/userEmail";
+import { isUserLoading } from "../store/selectors/isUserLoading";
+import { Navigate, useNavigate } from 'react-router-dom';
 export default function WorkoutProgress() {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [exercises, setExercises] = useState([]);
+  const userEmail = useRecoilValue(userEmailState);
+  const UserLoading = useRecoilValue(isUserLoading);
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if (UserLoading || !userEmail) {
+      navigate("/");
+    }
+  }, [UserLoading, userEmail, navigate])
 
   useEffect(() => {
     const fetchLog = async () => {
@@ -32,7 +44,7 @@ export default function WorkoutProgress() {
     fetchLog();
   }, [selectedDate]);
 
-  return (
+  return (<>
     <Box
       sx={{
         display: 'flex',
@@ -116,5 +128,5 @@ export default function WorkoutProgress() {
         )}
       </Card>
     </Box>
-  );
+    </> );
 }

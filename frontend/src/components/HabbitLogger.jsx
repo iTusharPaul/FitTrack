@@ -4,6 +4,11 @@ import { useState } from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../config';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from "recoil";
+import { userEmailState } from "../store/selectors/userEmail";
+import { isUserLoading } from "../store/selectors/isUserLoading";
+import { useEffect } from 'react';
+
 
 function Dailylog() {
   const navigate = useNavigate();
@@ -11,6 +16,15 @@ function Dailylog() {
   const [sleep, setSleep] = useState(0);
   const [stepCount, setStepCount] = useState(0);
   const [workoutDuration, setWorkoutDuration] = useState(0);
+  const userEmail = useRecoilValue(userEmailState);
+  const UserLoading = useRecoilValue(isUserLoading);
+ 
+
+  useEffect(()=>{
+    if (UserLoading || !userEmail) {
+      navigate("/");
+    }
+  }, [UserLoading, userEmail, navigate])
 
   const handleSubmit = async () => {
     try {

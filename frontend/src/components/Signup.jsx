@@ -14,6 +14,7 @@ function Signup() {
     const [height, setHeight] = useState(0);
     const [weight, setWeight] = useState(0);
     const [gender, setGender] = useState("");
+    const [error, setError] = useState("");
     const [isSignedOut,setIsSignedOut]=useState(false);
     const navigate = useNavigate();
     const setUser = useSetRecoilState(userState);
@@ -95,7 +96,19 @@ function Signup() {
                     sx={{ mt: 2 }}
                 />
                 <TextField
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        setPassword(value);
+    
+                        // Inline Validation using Regex
+                        setError(
+                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{8,}$/.test(value)
+                                ? "" // if  Valid password
+                                : "Must have 1 uppercase, 1 lowercase, 1 special char & 8+ chars" //else error msg
+                        );
+                    }}
+                    error={!!error}
+                    helperText={error}
                     label="Password"
                     type="password"
                     variant="outlined"
