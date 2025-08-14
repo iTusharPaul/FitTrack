@@ -25,12 +25,44 @@ Whether you’re a **seasoned athlete** or just starting your fitness journey, F
 
 | Category       | Technologies Used |
 |----------------|-------------------|
-| **Frontend**   | React, HTML, CSS, JavaScript |
+| **Frontend**   | React, Recoil, HTML, CSS, JavaScript |
 | **Backend**    | Node.js, Express.js |
 | **Database**   | MongoDB |
 | **Deployment** | Netlify (Frontend), AWS EC2 (Backend) |
 
 ---
+
+## 🔄 Project Flow  
+
+1. **User Registration & Login** – Secure authentication to create and access personal fitness data.  
+2. **Dashboard Display** – Shows daily stats like workout duration, step count, water intake, sleep duration.  
+3. **Workout Logging** – User adds exercises with sets, reps, and weights.  
+4. **Data Storage** – All logs are stored securely in MongoDB.  
+5. **Progress Visualization** – Charts and graphs display trends over time.  
+
+---
+
+## 📌 Visual Workflow  
+
+```mermaid
+flowchart TD
+    A[User Login / Landing Page] --> B[Dashboard shows wide range of muscle groups for logging workout and habit logs]
+    B --> C[Select Muscle Group from cards shown in the bottom of the screen]
+    C --> D[Fetch related exercises from MongoDB via backend API]
+    D --> E[Log Workout - Click on  exercise to open form]
+    E --> F[Enter 3 sets of reps & weights for current day for the chosen workout]
+    F --> G[Send data via Axios to backend & store in MongoDB]
+    B --> H[Log Daily Habits - water intake, sleep, steps, workout duration]
+    H --> I[Recoil updates landing page instantly without refresh]
+    B --> J[View Progress - past logs & compare performance]
+    J --> K[Logs Filtered by date & muscle group]
+    G --> L[Persistent Storage - logs saved day-wise in MongoDB]
+    I --> L
+    K --> L
+    L --> M[Data available across sessions & devices]
+
+```
+
 
 ## 🚀 Getting Started  
 
@@ -55,3 +87,12 @@ npm install
 
 # Start the development server
 npm start
+ ```
+
+
+
+## 👨‍💻 Author  
+
+**Tushar Paul**  
+🔗 [GitHub](https://github.com/itushar) | 💼 [LinkedIn](https://linkedin.com/in/tusharpaul)  
+
