@@ -94,5 +94,5 @@ npm start
 ## 👨‍💻 Author  
 
 **Tushar Paul**  
-🔗 [GitHub](https://github.com/itushar) | 💼 [LinkedIn](https://linkedin.com/in/tusharpaul)  
+🔗 [GitHub](https://github.com/iTusharPaul) | 💼 [LinkedIn](https://www.linkedin.com/in/tushar-paul-cse/)  
 
